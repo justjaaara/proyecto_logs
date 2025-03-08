@@ -1,15 +1,16 @@
-import java.net.UnknownHostException;
+//import java.net.UnknownHostException;
 import java.time.LocalDateTime;
-import java.net.InetAddress;
+//import java.net.InetAddress;
+import java.time.format.DateTimeFormatter;
 
 public class Request {
 
     private final String ip;
     private final LocalDateTime dateTime;
     private final String requestType;
-    private final String responseCode;
+    private final int responseCode;
 
-    public Request(String ip, LocalDateTime dateTime, String requestType, String responseCode) {
+    public Request(String ip, LocalDateTime dateTime, String requestType, int responseCode) {
         this.ip = ip;
         this.dateTime = dateTime;
         this.requestType = requestType;
@@ -28,14 +29,13 @@ public class Request {
         return requestType;
     }
 
-    public String getResponseCode() {
+    public int getResponseCode() {
         return responseCode;
     }
 
-
-
     @Override
     public String toString(){
-        return String.format("%p - %t %r %d ",ip,requestType, responseCode, dateTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd' / 'HH:mm");
+        return (ip + " - " + requestType + " " + responseCode + " " + dateTime.format(formatter));
     }
 }
